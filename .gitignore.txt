@@ -1,3 +1,0 @@
-speedtest.exe
-speedtest.md
-.gitignore
