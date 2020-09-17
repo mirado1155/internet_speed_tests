@@ -22,9 +22,9 @@ def process_csv():
 
 # This function executes a command which tests internet speed and outputs to a csv file. Set on timer.
 def set_continuous_tests():
-    NUM_TESTS = 30
-    MINUTES_REST = 30
-    for test in range(NUM_TESTS):
+    num_tests = input("Please enter number of tests: ")
+    minutes_rest = input("Please enter period between tests: ")
+    for test in range(num_tests):
         curr_time = datetime.datetime.now().strftime("%d/%m/%y %H:%M:%S")
         with open("speed_test_results.csv", "a") as write_file:
             writer = csv.writer(write_file)
@@ -32,8 +32,8 @@ def set_continuous_tests():
         subprocess.call(["speedtest.exe", "--format=csv", ">>", "speed_test_results.csv"], shell=True)
         print("Test {} conducted: {}".format((test + 1), curr_time))
 
-        if ((test + 1) != NUM_TESTS):
-            time.sleep(MINUTES_REST * 60)
+        if ((test + 1) != num_tests):
+            time.sleep(int(minutes_rest) * 60)
         
 
 if __name__ == "__main__":
