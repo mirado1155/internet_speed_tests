@@ -21,6 +21,7 @@ def test_speed(num_tests, rest_period):
         }
         results.append(output)
         print("Trial number {} completed".format(test + 1))
+        print(output)
         time.sleep(rest_period * 60)
     save_results(results)
     plot_results(results)
