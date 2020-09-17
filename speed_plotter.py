@@ -2,7 +2,7 @@ import csv
 import matplotlib.pyplot as pyplot
 
 
-def get_and_plot_points():
+def get_and_plot_points(trial_date, trial_times):
     x_points = []
     down_points = []
     up_points = []
@@ -17,11 +17,13 @@ def get_and_plot_points():
 
     pyplot.plot(range(1, (len(down_points) + 1)), down_points, label="Down Speeds")
     pyplot.plot(range(1, (len(down_points) + 1)), up_points, label="Up Speeds")
-    pyplot.xlabel("Trials")
+    pyplot.xlabel("Trials - {} {}".format(trial_date, trial_times))
     pyplot.ylabel("Mbps")
     pyplot.legend()
     pyplot.show()
 
 
 if __name__ == "__main__":
-    get_and_plot_points()
+    trial_date = input("Please enter date: ")
+    trial_times = input("Please enter time range: ")
+    get_and_plot_points(trial_date, trial_times)
