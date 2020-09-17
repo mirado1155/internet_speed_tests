@@ -1,1 +1,3 @@
-"server name","server id","latency","jitter","packet loss","download","upload","download bytes","upload bytes","share url"
+Date,Trial Number,Time,Download,Upload
+2020-09-17,0,03:12,37.65,11.32
+2020-09-17,1,03:12,30.41,11.57

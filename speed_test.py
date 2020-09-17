@@ -1,41 +1,58 @@
-import subprocess
-import csv
-import datetime
+from datetime import datetime
 import time
-import matplotlib
+import speedtest
+import csv
+import matplotlib.pyplot as pyplot
 
-
-# This function takes the raw, original csv data and extracts only the down / up speeds. Also adds datetime of each trial
-def process_csv():
-    SPEED_DIVISOR = 100000
-    SIGNIFICANT_DIGITS = 2
-    with open("speed_test_results.csv", "r") as read_file:
-        reader = csv.reader(read_file)
-        next(reader)
-        with open("down_up_speeds.csv", "w") as write_file:
-            writer = csv.writer(write_file)
-            for line in reader:
-                if (len(line) == 1):
-                    writer.writerow([line[0]])
-                elif (len(line) > 1):
-                    writer.writerow([round((int(line[5]) / SPEED_DIVISOR), SIGNIFICANT_DIGITS), round((int(line[6]) / SPEED_DIVISOR), SIGNIFICANT_DIGITS)])
-
-# This function executes a command which tests internet speed and outputs to a csv file. Set on timer.
-def set_continuous_tests():
-    num_tests = input("Please enter number of tests: ")
-    minutes_rest = input("Please enter period between tests: ")
+def test_speed():
+    SPEED_DIVISOR = 1000000
+    num_tests = int(input("Number of tests: "))
+    rest_period = int(input("Time between tests (in minutes): "))
+    s = speedtest.Speedtest()
+    results = []
     for test in range(num_tests):
-        curr_time = datetime.datetime.now().strftime("%d/%m/%y %H:%M:%S")
-        with open("speed_test_results.csv", "a") as write_file:
-            writer = csv.writer(write_file)
-            writer.writerow(["Time: {}".format(curr_time)])
-        subprocess.call(["speedtest.exe", "--format=csv", ">>", "speed_test_results.csv"], shell=True)
-        print("Test {} conducted: {}".format((test + 1), curr_time))
+        curr_time = datetime.now()
+        download_time = s.download()
+        upload_time = s.upload()
+        output = {
+            "Date":datetime.now().date(),
+            "Trial Number":test,
+            "Time": curr_time.strftime('%I:%M'),
+            "Download":round((download_time / SPEED_DIVISOR), 2),
+            "Upload":round((upload_time / SPEED_DIVISOR), 2)
+        }
+        results.append(output)
+        print("Trial number {} completed".format(test + 1))
+        time.sleep(rest_period * 60)
+    print(results)
+    save_results(results)
+    plot_results(results)
 
-        if ((test + 1) != num_tests):
-            time.sleep(int(minutes_rest) * 60)
-        
+def save_results(results):
+    columns = ['Date', 'Trial Number', 'Time', 'Download', 'Upload']
+    filename = "speed_test_results.csv"
+    with open(filename, "a") as write_file:
+        writer = csv.DictWriter(write_file, fieldnames = columns)
+        writer.writeheader()
+        writer.writerows(results)
+
+
+def plot_results(results):
+    trial_numbers = []
+    down_speeds = []
+    up_speeds = []
+    for result in results:
+        trial_numbers.append(int(result["Trial Number"]))
+        down_speeds.append(float(result["Download"]))
+        up_speeds.append(float(result["Upload"]))
+    pyplot.plot(range(1, (len(trial_numbers) + 1)), down_speeds, label="Down")
+    pyplot.plot(range(1, (len(trial_numbers) + 1)), up_speeds, label="Up")
+    pyplot.xlabel("Trials - {}".format(result["Date"]))
+    pyplot.ylabel("Mbps")
+    pyplot.legend()
+    pyplot.savefig('{}'.format(result["Date"]))
+    pyplot.show()
+    
 
 if __name__ == "__main__":
-    set_continuous_tests()
-    process_csv()
+    test_speed()
