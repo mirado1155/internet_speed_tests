@@ -4,10 +4,8 @@ import speedtest
 import csv
 import matplotlib.pyplot as pyplot
 
-def test_speed():
+def test_speed(num_tests, rest_period):
     SPEED_DIVISOR = 1000000
-    num_tests = int(input("Number of tests: "))
-    rest_period = int(input("Time between tests (in minutes): "))
     s = speedtest.Speedtest()
     results = []
     for test in range(num_tests):
@@ -24,7 +22,6 @@ def test_speed():
         results.append(output)
         print("Trial number {} completed".format(test + 1))
         time.sleep(rest_period * 60)
-    print(results)
     save_results(results)
     plot_results(results)
 
@@ -38,9 +35,7 @@ def save_results(results):
 
 
 def plot_results(results):
-    trial_numbers = []
-    down_speeds = []
-    up_speeds = []
+    trial_numbers, down_speeds, up_speeds = []
     for result in results:
         trial_numbers.append(int(result["Trial Number"]))
         down_speeds.append(float(result["Download"]))
@@ -50,9 +45,11 @@ def plot_results(results):
     pyplot.xlabel("Trials - {}".format(result["Date"]))
     pyplot.ylabel("Mbps")
     pyplot.legend()
-    pyplot.savefig('{}'.format(result["Date"]))
+    pyplot.savefig('figures/{}'.format(result["Date"]))
     pyplot.show()
     
 
 if __name__ == "__main__":
-    test_speed()
+    num_tests = int(input("Number of tests: "))
+    rest_period = int(input("Time between tests (in minutes): "))
+    test_speed(num_tests, rest_period)
