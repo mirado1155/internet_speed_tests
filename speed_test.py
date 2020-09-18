@@ -4,6 +4,7 @@ import speedtest
 import csv
 import matplotlib.pyplot as pyplot
 
+
 def test_speed(num_tests, rest_period):
     SPEED_DIVISOR = 1000000
     s = speedtest.Speedtest()
@@ -25,6 +26,7 @@ def test_speed(num_tests, rest_period):
         time.sleep(rest_period * 60)
     save_results(results)
     plot_results(results)
+
 
 def save_results(results):
     columns = ['Date', 'Trial Number', 'Time', 'Download', 'Upload']
