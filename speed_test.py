@@ -2,6 +2,7 @@ from datetime import datetime
 import time
 import speedtest
 import csv
+import json
 import matplotlib.pyplot as pyplot
 
 
@@ -22,10 +23,18 @@ def test_speed(num_tests, rest_period):
         }
         results.append(output)
         print("Trial number {} completed".format(test + 1))
+        write_to_temp_file(output)
         print(output)
         time.sleep(rest_period * 60)
     save_results(results)
     plot_results(results)
+
+
+def write_to_temp_file(output):
+    with open('output_file.csv', 'a') as write_file:
+        columns = ['Date', 'Trial Number', 'Time', 'Download', 'Upload']
+        writer = csv.DictWriter(write_file, fieldnames=columns)
+        writer.writerow(output)
 
 
 def save_results(results):
