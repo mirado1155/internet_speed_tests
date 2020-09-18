@@ -48,7 +48,10 @@ def plot_results(results):
     pyplot.xlabel("Trials - {}".format(result["Date"]))
     pyplot.ylabel("Mbps")
     pyplot.legend()
-    pyplot.savefig('figures/{}'.format(result["Date"]))
+    # save_prompt = input("Save figure as '{}'? Y/N: ".format(result["Date"]))
+    # if(save_prompt.lower() == 'y'):
+    #     pyplot.savefig('figures/{}'.format(result["Date"]))
+    #     print("Saved!")
     pyplot.show()
     
 
