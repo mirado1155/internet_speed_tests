@@ -36,7 +36,9 @@ def save_results(results):
 
 
 def plot_results(results):
-    trial_numbers, down_speeds, up_speeds = []
+    trial_numbers = []
+    down_speeds = [] 
+    up_speeds = []
     for result in results:
         trial_numbers.append(int(result["Trial Number"]))
         down_speeds.append(float(result["Download"]))
