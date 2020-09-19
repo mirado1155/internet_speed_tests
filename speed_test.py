@@ -14,9 +14,10 @@ def test_speed(num_tests, rest_period):
         curr_time = datetime.now()
         download_time = s.download()
         upload_time = s.upload()
+        today = datetime.now().date()
         output = {
-            "Date":datetime.now().date(),
-            "Trial Number":test,
+            "Date":today,
+            "Trial Number":(test + 1),
             "Time": curr_time.strftime('%I:%M'),
             "Download":round((download_time / SPEED_DIVISOR), 2),
             "Upload":round((upload_time / SPEED_DIVISOR), 2)
