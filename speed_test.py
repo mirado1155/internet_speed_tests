@@ -5,6 +5,38 @@ import csv
 import json
 import matplotlib.pyplot as pyplot
 
+# def timer():
+#     stop_time = input("Please enter a stopping time: ")
+    # while(True):
+    #     frmt = '%M'
+    #     current_time = datetime.now().strftime('%I:%M')
+    #     tdelta = datetime.strptime(stop_time, frmt) - datetime.strptime(current_time, frmt)
+    #     print(tdelta)
+    #     if(stop_time != current_time):
+    #         print("it is not time")
+    #         # time.sleep(10)
+    #     else:
+    #         print("it is time")
+    #         break
+
+
+    # frmt = '%I:%M'
+    # current_time = datetime.now().strftime('%I:%M')
+    # tdelta = datetime.strptime(stop_time, frmt) - datetime.strptime(current_time, frmt)
+    # time_diff = int((tdelta.total_seconds()) / 60)
+    # print(time_diff)
+    # print(tdelta)
+    # interval = 15
+    # next_time = current_time + interval
+    # print(next_time)
+
+
+    # time_one = '10:33:26'
+    # time_two = '11:15:49' # for example
+    # frmt = '%H:%M'
+    # tdelta = datetime.strptime(time_two, frmt) - datetime.strptime(time_one, frmt)
+    # print(tdelta)
+
 
 def test_speed(num_tests, rest_period):
     SPEED_DIVISOR = 1000000
@@ -24,28 +56,19 @@ def test_speed(num_tests, rest_period):
         }
         results.append(output)
         print("Trial number {} completed".format(test + 1))
-        write_to_temp_file(output)
+        write_to_file(output)
         print(output)
         if (test != num_tests):
             time.sleep(rest_period * 60)
-    save_results(results)
     plot_results(results)
 
 
-def write_to_temp_file(output):
+def write_to_file(output):
     with open('output_file.csv', 'a') as write_file:
         columns = ['Date', 'Trial Number', 'Time', 'Download', 'Upload']
         writer = csv.DictWriter(write_file, fieldnames=columns)
+        # writer.writeheader() -- Include this if you want a header with the data
         writer.writerow(output)
-
-
-def save_results(results):
-    columns = ['Date', 'Trial Number', 'Time', 'Download', 'Upload']
-    filename = "speed_test_results.csv"
-    with open(filename, "a") as write_file:
-        writer = csv.DictWriter(write_file, fieldnames = columns)
-        writer.writeheader()
-        writer.writerows(results)
 
 
 def plot_results(results):
@@ -65,6 +88,7 @@ def plot_results(results):
     # if(save_prompt.lower() == 'y'):
     #     pyplot.savefig('figures/{}'.format(result["Date"]))
     #     print("Saved!")
+    # --include this if you want a save prompt
     pyplot.show()
     
 
@@ -72,3 +96,4 @@ if __name__ == "__main__":
     num_tests = int(input("Number of tests: "))
     rest_period = int(input("Time between tests (in minutes): "))
     test_speed(num_tests, rest_period)
+    # timer()
