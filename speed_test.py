@@ -26,7 +26,8 @@ def test_speed(num_tests, rest_period):
         print("Trial number {} completed".format(test + 1))
         write_to_temp_file(output)
         print(output)
-        time.sleep(rest_period * 60)
+        if (test != num_tests):
+            time.sleep(rest_period * 60)
     save_results(results)
     plot_results(results)
 
