@@ -38,29 +38,30 @@ import matplotlib.pyplot as pyplot
     # print(tdelta)
 
 
-def test_speed(num_tests, rest_period):
+def test_speed(rest_period):
     SPEED_DIVISOR = 1000000
     s = speedtest.Speedtest()
-    results = []
-    for test in range(num_tests):
+    # results = []
+    count = 1
+    while(True):
         curr_time = datetime.now()
         download_time = s.download()
         upload_time = s.upload()
         today = datetime.now().date()
         output = {
             "Date":today,
-            "Trial Number":(test + 1),
+            "Trial Number":(count),
             "Time": curr_time.strftime('%I:%M'),
             "Download":round((download_time / SPEED_DIVISOR), 2),
             "Upload":round((upload_time / SPEED_DIVISOR), 2)
         }
-        results.append(output)
-        print("Trial number {} completed".format(test + 1))
+        # results.append(output)
+        print("Trial number {} completed".format(count))
         write_to_file(output)
         print(output)
-        if (test != num_tests):
-            time.sleep(rest_period * 60)
-    plot_results(results)
+        count += 1
+        time.sleep(rest_period * 60)
+    # plot_results(results)
 
 
 def write_to_file(output):
@@ -93,7 +94,7 @@ def plot_results(results):
     
 
 if __name__ == "__main__":
-    num_tests = int(input("Number of tests: "))
+    # num_tests = int(input("Number of tests: "))
     rest_period = int(input("Time between tests (in minutes): "))
-    test_speed(num_tests, rest_period)
+    test_speed(rest_period)
     # timer()
