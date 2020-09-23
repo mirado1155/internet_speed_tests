@@ -11,8 +11,8 @@ def timed_sample_output():
     times = ['00', '15', '30', '45'] # List of quarter-hours
 
     # Loops to continually test current time against quarter-hours
+    counter = 1 # keeps track of how many loop loops have been looped
     while(True):
-        counter = 1 # keeps track of how many loop loops have been looped
         current_time = datetime.now().strftime('%H:%M')
         for quarter in times:
             if (current_time[3:5] == quarter):
@@ -24,13 +24,15 @@ def timed_sample_output():
             elif (quarter == times[3]):
                 if (counter == SECS_BETWEEN_LOOPS): # basically for every however many seconds, a "not time yet" message displays
                     print("It is not time yet... {}".format(current_time))
+                    counter = 0
+        counter += 1
         time.sleep(1)
 
 
 # Takes a sample of internet connection Down/Up speeds and puts the results in a dictionary
 # Outputs the results of each test onto console
 def test_speed(curr_time):
-    
+
     SPEED_DIVISOR = 1000000 # for converting bits per second into Mbps
 
     s = speedtest.Speedtest()
