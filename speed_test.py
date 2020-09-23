@@ -51,7 +51,7 @@ def test_speed(rest_period):
         output = {
             "Date":today,
             "Trial Number":(count),
-            "Time": curr_time.strftime('%I:%M'),
+            "Time": curr_time.strftime('%H:%M'),
             "Download":round((download_time / SPEED_DIVISOR), 2),
             "Upload":round((upload_time / SPEED_DIVISOR), 2)
         }
