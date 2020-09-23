@@ -3,3 +3,5 @@ speed_test_results.csv
 plotter.py
 output_fileCopy.csv
 speed_test_temp.py
+/__pycache__
+output_file.csv
