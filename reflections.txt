@@ -1,0 +1,14 @@
+The idea came about because my ISP is garbage, and I wanted to see if there is a discernable pattern
+of downtime. 
+
+I started by going to speedtest.net by Ookla to see if they had an API which would allow me to test
+my internet speed in a script. They did not. However, they had a nifty CLI! So I downloaded that.
+
+From there, I learned how to write the results of the speed test CLI to a file directly from the
+command line.
+
+Then, I used python's subprocess library to execute the speed test command at regular intervals.
+
+However, those intervals were not as regular as I would have liked. I was using time.sleep() functions
+which unfortunately weren't precise enough because it had to factor in the time taken up by the actual
+speed test!
