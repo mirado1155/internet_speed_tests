@@ -4,10 +4,12 @@
 plotter.py
 speed_test_misc.py
 
+output/output_file.csv
 output/output_fileCopy.csv
 
 runSpeedTest.bat
 killSpeedTest.bat
+
 output/stderr.txt
 output/stdout.txt
 output/status.txt
