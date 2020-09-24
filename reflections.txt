@@ -12,3 +12,18 @@ Then, I used python's subprocess library to execute the speed test command at re
 However, those intervals were not as regular as I would have liked. I was using time.sleep() functions
 which unfortunately weren't precise enough because it had to factor in the time taken up by the actual
 speed test!
+
+So, I added a list of times - quarters of the hour, to be precise - to constantly compare the current time. If it matches,
+then it runs the test. In the future, I'd like to add options for the user to adjust their increments instead of having it
+*gasp* hard-coded!
+
+This application can now run (at least on my computer) with pythonw (or pyw) which will allow it to run completely in the background.
+To do this, all output had to be routed to files instead of the console, since pythonw does not seem to work when there's console 
+output. Story time: this took some time to research since it was unclear how to stop the program once it started running. All sources 
+indicated that a peek inside task manager will show pyw.exe running, and you can just end the task there. However, I kept being 
+unable to see it in my own task manager. It turned out that the culprit wasn't only those pesky print functions, but having a path
+to output any errors! Remember, pyw doesn't like command line output. I found a solution which allowed for errors to be output to a
+file from the command line. From this point, I was able to get the program to run in the background, along with a visible process
+to easily terminate. My last step was learning how to view all running processes and terminate processes all from the command line.
+Super easy. I incorporated everything into two batch files, one to run the script, and one to kill it. It's been working without
+a hitch!
