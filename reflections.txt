@@ -18,7 +18,8 @@ speed test!
 
 So, I added a list of times - quarters of the hour, to be precise - to constantly compare the current time. If it matches,
 then it runs the test. In the future, I'd like to add options for the user to adjust their increments instead of having it
-*gasp* hard-coded!
+*gasp* hard-coded! To do this, I had to learn more about the datetime module and how to deal with datetime objects. There
+was also an element of slicing in order to match times. 
 
 This application can now run (at least on my computer) with pythonw (or pyw) which will allow it to run completely in the background.
 To do this, all output had to be routed to files instead of the console, since pythonw does not seem to work when there's console 
