@@ -9,6 +9,9 @@ command line.
 
 Then, I used python's subprocess library to execute the speed test command at regular intervals.
 
+I discovered that there was actually a python module I could download that tests internet speed, which eliminated the need to use
+subprocess!
+
 However, those intervals were not as regular as I would have liked. I was using time.sleep() functions
 which unfortunately weren't precise enough because it had to factor in the time taken up by the actual
 speed test!
