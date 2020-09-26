@@ -17,25 +17,25 @@ def write_status(output_file, output):
 '''Run the test_speed() function at every quarter of the hour precisely.'''
 def timed_sample_output():
     SECS_BETWEEN_LOOPS = 120 # How long between each "not time yet" message
-    times = ['00', '15', '30', '45'] # List of quarter-hours
+    times = ['00', '15', '25', '45'] # List of quarter-hours
 
     
-    counter = 1 # keeps track of how many loop loops have been looped
+    # counter = 1 # keeps track of how many loop loops have been looped
     while(True): # Loop to continually test current time against quarter-hours
         current_time = datetime.now().strftime('%H:%M')
         is_time_message = "It is time {}\n".format(current_time)
-        not_time_message = "It is not time yet... {}\n".format(current_time)
+        # not_time_message = "It is not time yet... {}\n".format(current_time)
         for quarter in times:
             if (current_time[3:5] == quarter):
                 write_status(STAUTS_OUTPUT_FILE, is_time_message)
                 test_speed(current_time)
                 time.sleep(60) # Ensures a test isn't called twice for the same quarter-hour
                 break
-            elif (quarter == times[3]):
-                if (counter >= SECS_BETWEEN_LOOPS): # for every however many seconds, a "not time yet" message displays
-                    write_status(STAUTS_OUTPUT_FILE, not_time_message)
-                    counter = 0
-        counter += 1
+        #     elif (quarter == times[3]):
+        #         if (counter >= SECS_BETWEEN_LOOPS): # for every however many seconds, a "not time yet" message displays
+        #             # write_status(STAUTS_OUTPUT_FILE, not_time_message)
+        #             counter = 0
+        # counter += 1
         time.sleep(1)
 
 
