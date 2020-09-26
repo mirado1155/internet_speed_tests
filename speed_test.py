@@ -17,7 +17,7 @@ def write_status(output_file, output):
 '''Run the test_speed() function at every quarter of the hour precisely.'''
 def timed_sample_output():
     SECS_BETWEEN_LOOPS = 120 # How long between each "not time yet" message
-    times = ['00', '15', '25', '45'] # List of quarter-hours
+    times = ['00', '15', '30', '45'] # List of quarter-hours
 
     
     # counter = 1 # keeps track of how many loop loops have been looped
