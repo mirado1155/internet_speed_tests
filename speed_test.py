@@ -20,10 +20,8 @@ def timed_sample_output():
     times = ['00', '15', '30', '45'] # List of quarter-hours
     while(True): # Loop to continually test current time against quarter-hours
         current_time = datetime.now().strftime('%H:%M')
-        is_time_message = "It is time {}\n".format(current_time)
         for quarter in times:
             if (current_time[3:5] == quarter):
-                write_status(STAUTS_OUTPUT_FILE, is_time_message)
                 test_speed(current_time)
                 time.sleep(60) # Ensures a test isn't called twice for the same quarter-hour
                 break
