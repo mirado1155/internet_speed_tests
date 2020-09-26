@@ -6,7 +6,7 @@ import csv
 
 STAUTS_OUTPUT_FILE = 'output/status.txt' # file to output script status
 DATA_FILE = 'output/output_file.csv' # file to store .csv data
-TIME_BETWEEN_LOOPS = 1 # in seconds
+SECONDS_BETWEEN_LOOPS = 1
 
 
 '''Outputs current status to txt file'''
@@ -27,7 +27,7 @@ def timed_sample_output():
                 test_speed(current_time)
                 time.sleep(60) # Ensures a test isn't called twice for the same quarter-hour
                 break
-        time.sleep(TIME_BETWEEN_LOOPS)
+        time.sleep(SECONDS_BETWEEN_LOOPS)
 
 
 '''Takes a sample of internet connection Down/Up speeds and puts the results in a dictionary
