@@ -28,9 +28,9 @@ def timed_sample_output():
         time.sleep(SECONDS_BETWEEN_LOOPS)
 
 
-'''Takes a sample of internet connection Down/Up speeds and puts the results in a dictionary
-    Outputs the results of each test onto console'''
 def test_speed(curr_time):
+    '''Takes a sample of internet connection Down/Up speeds and puts the results in a dictionary
+    Outputs the results of each test onto console'''
 
     SPEED_DIVISOR = 1000000 # for converting bits per second into Mbps
 
